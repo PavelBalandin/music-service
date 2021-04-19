@@ -11,7 +11,7 @@ import java.util.List;
 @Table
 @Data
 @NoArgsConstructor
-public class Artist {
+public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,15 +19,15 @@ public class Artist {
     @Column(nullable = false)
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "album")
+    private List<Music> music;
+
     @OneToOne
     @JoinColumn(name = "image_id", referencedColumnName = "id")
     private Image image;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "artists")
-    private List<Music> music;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "artist")
-    private List<Album> albums;
 }

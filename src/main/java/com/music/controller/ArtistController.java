@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/artist")
+@RequestMapping("/api/v1/artists")
 public class ArtistController {
     private final ArtistRepository artistRepository;
 

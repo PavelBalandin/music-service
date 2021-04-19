@@ -11,7 +11,7 @@ import java.util.List;
 @Table
 @Data
 @NoArgsConstructor
-public class Artist {
+public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,15 +19,7 @@ public class Artist {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne
-    @JoinColumn(name = "image_id", referencedColumnName = "id")
-    private Image image;
-
     @JsonIgnore
-    @ManyToMany(mappedBy = "artists")
+    @ManyToMany(mappedBy = "tags")
     private List<Music> music;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "artist")
-    private List<Album> albums;
 }

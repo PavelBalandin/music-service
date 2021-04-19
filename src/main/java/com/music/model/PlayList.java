@@ -1,6 +1,5 @@
 package com.music.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +10,7 @@ import java.util.List;
 @Table
 @Data
 @NoArgsConstructor
-public class Artist {
+public class PlayList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,15 +18,14 @@ public class Artist {
     @Column(nullable = false)
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToOne
     @JoinColumn(name = "image_id", referencedColumnName = "id")
     private Image image;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "artists")
+    @ManyToMany(mappedBy = "playLists")
     private List<Music> music;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "artist")
-    private List<Album> albums;
 }
